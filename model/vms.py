@@ -50,6 +50,7 @@ from wok.xmlutils.utils import xml_item_remove, xml_item_update
 
 from wok.plugins.kimchi import model
 from wok.plugins.kimchi import serialconsole
+from wok.plugins.kimchi.config import config as kimchi_config
 from wok.plugins.kimchi.config import READONLY_POOL_TYPE, get_kimchi_version
 from wok.plugins.kimchi.kvmusertests import UserTests
 from wok.plugins.kimchi.model.config import CapabilitiesModel
@@ -1292,7 +1293,7 @@ class VMModel(object):
         graphics_port = graphics[2]
         graphics_port = graphics_port if state == 'running' else None
         # only take a screenshot if configured to do so
-        take_screenshot = config.get('kimchi', {}).get('take_screenshot', True)
+        take_screenshot = kimchi_config.get('kimchi', {}).get('take_screenshot', True)
         try:
             if take_screenshot and state == 'running' and self._has_video(dom):
                 screenshot = self.vmscreenshot.lookup(name)
